@@ -13,8 +13,7 @@
 
 	   $scope.lunchValue = function () {
 	   	var foods = $scope.lunch.split(',');
-	   	//DISCARD EMPTY RESULTS
-	   	foods = foods.filter(Boolean);
+
 	   	lunchCount = foods.length;
 	   	console.log(lunchCount);
 	   	//nothing
