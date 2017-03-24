@@ -19,7 +19,10 @@
 		];
 
 	 	toBuy.moveItem = function(index, itemName, quantity){
-	 	   ShoppingListService.moveItem(index);
+	 			 	   	    toBuy.itemsToBuy.splice(index, 1);
+
+	 	   ShoppingListCheckOffService.moveItem(index, itemName, quantity);
+
 	 	};
 	}
 	AlreadyBoughtController.$inject=['ShoppingListCheckOffService'];
@@ -49,7 +52,11 @@
 	  };
 	  service.moveItem = function(index, itemName, quantity){
 	  	//take out of tobuy array
-	    itemsToBuy.splice(index, 1);
+	  		 		console.log("huh2");
+	  		 		console.log("index:", index);
+	  		 		console.log(itemName);
+
+	  		 		console.log(quantity);
 
 	    //move into bought array
 	    var item = {
