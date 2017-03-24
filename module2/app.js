@@ -9,17 +9,10 @@
 	ToBuyController.$inject=['ShoppingListCheckOffService'];
 	function ToBuyController(ShoppingListCheckOffService){
 		var toBuy = this;
-		//hardcoded list of items to buy, default
-		toBuy.itemsToBuy =[
-		{name: "cookies", quantity: 10},
-		{name: "ice cream", quantity: 5},
-		{name: "coffee", quantity: 8},
-		{name: "chickens", quantity: 34},
-		{name: "peanut butter", quantity: 2},
-		];
+		//get list of items to buy from service
+		toBuy.itemsToBuy = ShoppingListCheckOffService.getItemsToBuy();
 
 	 	toBuy.moveItem = function(index, itemName, quantity){
-	 			 	   	    toBuy.itemsToBuy.splice(index, 1);
 
 	 	   ShoppingListCheckOffService.moveItem(index, itemName, quantity);
 
@@ -28,35 +21,35 @@
 	AlreadyBoughtController.$inject=['ShoppingListCheckOffService'];
 	function AlreadyBoughtController(ShoppingListCheckOffService){
 		var bought = this;
+		//get items that have been bought from service 
 		bought.itemsBought = ShoppingListCheckOffService.getItemsBought();
 	}
 
 	function ShoppingListCheckOffService() {
 	  var service = this;
 
-	  // List of shopping items
-	  var itemsToBuy = [];
+	//hardcoded list of items to buy, default
+	  var itemsToBuy = [
+	  	{name: "cookies", quantity: 10},
+		{name: "ice cream", quantity: 5},
+		{name: "coffee", quantity: 8},
+		{name: "chickens", quantity: 34},
+		{name: "peanut butter", quantity: 2},
+		];
+
+		//haven't bought anything yet so...
 	  var itemsBought = [];
-	  service.addItem = function (itemName, quantity) {
-	    var item = {
-	      name: itemName,
-	      quantity: quantity
-	    };
-	    items.push(item);
-	  };
+
+	 
 	  service.getItemsToBuy = function () {
-	    return itemsBought;
+	    return itemsToBuy;
 	  };
 	  service.getItemsBought = function () {
 	    return itemsBought;
 	  };
 	  service.moveItem = function(index, itemName, quantity){
 	  	//take out of tobuy array
-	  		 		console.log("huh2");
-	  		 		console.log("index:", index);
-	  		 		console.log(itemName);
-
-	  		 		console.log(quantity);
+	 	itemsToBuy.splice(index, 1);
 
 	    //move into bought array
 	    var item = {

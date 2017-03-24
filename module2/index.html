@@ -4,7 +4,7 @@
     <title>Shopping List Check Off</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <script src="angular.js"></script>
+    <script src="angular.min.js"></script>
     <script src="app.js"></script>
     <style>
       .emptyMessage {
@@ -39,7 +39,7 @@
 
        <li ng-repeat="item in toBuy.itemsToBuy">Buy {{item.quantity}} {{item.name}} <button ng-click="toBuy.moveItem($index,item.name,item.quantity);" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li></li>
      </ul>
-     <div ng-hide="toBuy.itemsToBuy" class="emptyMessage">Everything is bought!</div>
+     <div ng-hide="toBuy.itemsToBuy.length!=0" class="emptyMessage">Everything is bought!</div>
     </div>
 
     <!-- Already Bought List -->
@@ -49,7 +49,7 @@
        <!--<li>Bought 10 cookies</li>-->
        <li ng-repeat="item in bought.itemsBought">Bought {{item.quantity}} {{item.name}}</li>
      </ul>
-     <div ng-if="!bought.itemsBought" class="emptyMessage">Nothing bought yet.</div>
+     <div ng-show="bought.itemsBought.length==0" class="emptyMessage">Nothing bought yet.</div>
     </div>
   </div>
 </div>
