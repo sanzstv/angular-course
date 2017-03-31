@@ -15,7 +15,6 @@
 		list.matches =[];
 		list.message ="";
 		list.search= function(){
-			console.log(list.query);
 
 			if(list.query){
 				var promise = MenuSearchService.getMatchedMenuItems(list.query);
@@ -24,12 +23,14 @@
 					if (list.matches.length == 0){
 						list.message = "No matches for \""+ list.query +"\" ";
 					}
+					else{
+						list.message = "All results for \""+ list.query +"\" (" +list.matches.length +" results)";
+					}
 				});
 			}
 			else{
 				list.message = "Please enter a search string.";
 			}
-			console.log(list.message);
 		};
 
 		list.removeItem = function(index){
@@ -49,8 +50,6 @@
 			    // process result and only keep items that match
 			    // return processed items
 			    var foundItems = result.data.menu_items;
-			    console.log("found items: ", foundItems);
-
 			    return foundItems.filter(function(item){
 				    return item.description.indexOf(searchTerm) !== -1;
 				});

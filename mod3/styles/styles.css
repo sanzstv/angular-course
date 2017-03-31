@@ -59,3 +59,9 @@ found-items{
   margin-bottom: 10px;
   line-height: 1.25;
 }
+
+.search-message{
+  margin-left: 10px;
+  float: left;
+  display: block;
+}
