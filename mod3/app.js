@@ -5,19 +5,20 @@
 	.controller('NarrowItDownController', NarrowItDownController)
 	.directive('foundItems',FoundItemsDirective)
 	.service('MenuSearchService', MenuSearchService)
-	.constant('ApiBasePath', "http://davids-restaurant.herokuapp.com");;
+	.constant('API_URL', "http://davids-restaurant.herokuapp.com/menu_items.json");;
 
 	
 	NarrowItDownController.$inject = ['MenuSearchService'];
-	function NarrowItDownController(ShoppingListFactory){
+	function NarrowItDownController(MenuSearchService){
 		var list = this;
 		list.query = "";
 		list.matches =[];
 		list.message ="";
-		menu.search= function(){
+		list.search= function(){
 			console.log(list.query);
+
 			if(list.query){
-				var promise = MenuSearchService.getMatchedMenuItems(query)
+				var promise = MenuSearchService.getMatchedMenuItems(list.query);
 				promise.then(function(response){
 					list.matches = response;
 					if (list.matches.length == 0){
@@ -30,20 +31,23 @@
 			}
 		};
 	}
-	MenuSearchService.$inject["http", "ApiBasePath"];
-	function MenuSearchService($http, ApiBasePath){
+	MenuSearchService.$inject =["$http", "API_URL"];
+	function MenuSearchService($http, API_URL){
 		var service = this;
-
 		//find items from API and return matches
 		service.getMatchedMenuItems = function(searchTerm){
+
 			return $http({
 				method: "GET",
-				url: (ApiBasePath + "/menu_items.json")
+				url: (API_URL)
 			}).then(function (result) {
 			    // process result and only keep items that match
 			    // return processed items
-
+				console.log($http.url);
 			    var foundItems = response.data.menu_items;
+			    console.log("found items: ", foundItems);
+
+			    console.log("found items!");
 			    return foundItems.filter(function(item){
 				    return item.description.indexOf(searchTerm) !== -1;
 				});
