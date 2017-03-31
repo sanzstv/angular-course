@@ -50,3 +50,12 @@ input[type="text"] {
     transform: rotate(360deg);
   }
 }
+
+found-items{
+  float: left;
+}
+
+.btn{
+  margin-bottom: 10px;
+  line-height: 1.25;
+}

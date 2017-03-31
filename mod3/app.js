@@ -27,8 +27,13 @@
 				});
 			}
 			else{
-				list.message = "Please enter a search string."
+				list.message = "Please enter a search string.";
 			}
+			console.log(list.message);
+		};
+
+		list.removeItem = function(index){
+			list.matches.splice(index, 1);
 		};
 	}
 	MenuSearchService.$inject =["$http", "API_URL"];
@@ -43,11 +48,9 @@
 			}).then(function (result) {
 			    // process result and only keep items that match
 			    // return processed items
-				console.log($http.url);
-			    var foundItems = response.data.menu_items;
+			    var foundItems = result.data.menu_items;
 			    console.log("found items: ", foundItems);
 
-			    console.log("found items!");
 			    return foundItems.filter(function(item){
 				    return item.description.indexOf(searchTerm) !== -1;
 				});
@@ -62,7 +65,7 @@
 			scope: {
 				items: "<",
 				onRemove: "&",
-				error: "<"
+				messsage: "<"
 			}
 		}
 		return ddo;
